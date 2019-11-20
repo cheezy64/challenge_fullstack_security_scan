@@ -1,0 +1,5 @@
+# CRLF Normalisation
+text eol=lf
+
+# Never merge Lockfiles
+package-lock.json -diff linguist-vendored
