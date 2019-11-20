@@ -1,0 +1,11 @@
+{
+  "name": "guardrails-api",
+  "version": "1.0.0",
+  "description": "Guardrails Challenge",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "Che Tse",
+  "license": "ISC"
+}
