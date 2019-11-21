@@ -4,6 +4,7 @@
   "description": "Guardrails Challenge",
   "main": "index.js",
   "scripts": {
+    "start": "nodemon index.js",
     "test": "jest"
   },
   "author": "Che Tse",
@@ -15,6 +16,13 @@
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-react": "^7.16.0",
-    "eslint-plugin-security": "^1.4.0"
+    "eslint-plugin-security": "^1.4.0",
+    "nodemon": "^2.0.0"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "http-status-codes": "^1.4.0",
+    "mongoose": "^5.7.12",
+    "morgan": "^1.9.1"
   }
 }
