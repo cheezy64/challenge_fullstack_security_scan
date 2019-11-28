@@ -8,7 +8,11 @@ module.exports = (_app) => {
     await newScan.save();
   };
 
-  const getScanResult = async (id) => Scan.findById(id).exec();
+  const getScanResult = async (id) => {
+    const document = await Scan.findById(id).exec();
+    if (document === null) throw new Error('Scan Result not found!');
+    return document;
+  };
 
   /*
   const updateScanResult = async ({

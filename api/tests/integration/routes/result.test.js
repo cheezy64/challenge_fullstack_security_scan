@@ -8,6 +8,7 @@ const Scan = require('../../../components/scan/scan.model');
 const request = supertest(app);
 
 const baseUrl = '/api/scan';
+const mockScanRepo = 'Guardrails';
 const mockScanFindings = [
   {
     type: 'sast',
@@ -27,8 +28,6 @@ const mockScanFindings = [
   },
 ];
 
-
-const mockScanRepo = 'Guardrails';
 let server;
 beforeAll(async () => {
   server = app.listen(await getPort({ port: getPort.makeRange(4000, 4200) }));
@@ -85,24 +84,81 @@ describe(`POST ${baseUrl}/result`, () => {
     await mongoose.connection.db.dropDatabase();
   });
 
-  it('should return success status when requested with validated body', async () => {
-    const mockScanResultBodyValid = JSON.stringify({
-      status: 'Queued',
-      repo: mockScanRepo,
-      findings: mockScanFindings,
-      queuedAt: new Date().toISOString(),
-      scanningAt: new Date().toISOString(),
-      finishedAt: new Date().toISOString(),
+  describe('with valid body based on status', () => {
+    it('should return success status when queueing', async () => {
+      const mockScanResultBody = JSON.stringify({
+        status: 'Queued',
+        repo: mockScanRepo,
+        findings: mockScanFindings,
+        queuedAt: new Date().toISOString(),
+      });
+
+      const res = await request
+        .post(`${baseUrl}/result`)
+        .set('Content-Type', 'application/json')
+        .send(mockScanResultBody);
+
+      const resObj = JSON.parse(res.text);
+      expect(resObj.status).toBe('success');
+      expect(res.status).toBe(200);
     });
 
-    const res = await request
-      .post(`${baseUrl}/result`)
-      .set('Content-Type', 'application/json')
-      .send(mockScanResultBodyValid);
+    it('should return success status when in progress', async () => {
+      const mockScanResultBody = JSON.stringify({
+        status: 'In Progress',
+        repo: mockScanRepo,
+        findings: mockScanFindings,
+        queuedAt: new Date().toISOString(),
+        scanningAt: new Date().toISOString(),
+      });
 
-    const resObj = JSON.parse(res.text);
-    expect(resObj.status).toBe('success');
-    expect(res.status).toBe(200);
+      const res = await request
+        .post(`${baseUrl}/result`)
+        .set('Content-Type', 'application/json')
+        .send(mockScanResultBody);
+
+      const resObj = JSON.parse(res.text);
+      expect(resObj.status).toBe('success');
+      expect(res.status).toBe(200);
+    });
+
+    it('should return success status when scan completed with Success', async () => {
+      const mockScanResultBody = JSON.stringify({
+        status: 'Success',
+        repo: mockScanRepo,
+        findings: mockScanFindings,
+        queuedAt: new Date().toISOString(),
+        scanningAt: new Date().toISOString(),
+      });
+
+      const res = await request
+        .post(`${baseUrl}/result`)
+        .set('Content-Type', 'application/json')
+        .send(mockScanResultBody);
+
+      const resObj = JSON.parse(res.text);
+      expect(resObj.status).toBe('success');
+      expect(res.status).toBe(200);
+    });
+
+    it('should return success status when scan completed with Failure', async () => {
+      const mockScanResultBody = JSON.stringify({
+        status: 'Failure',
+        repo: mockScanRepo,
+        findings: mockScanFindings,
+        queuedAt: new Date().toISOString(),
+        scanningAt: new Date().toISOString(),
+      });
+
+      const res = await request
+        .post(`${baseUrl}/result`)
+        .set('Content-Type', 'application/json')
+        .send(mockScanResultBody);
+
+      const resObj = JSON.parse(res.text);
+      expect(resObj.status).toBe('success');
+      expect(res.status).toBe(200);
+    });
   });
 
   it('should return fail when requested with missing required fields', async () => {

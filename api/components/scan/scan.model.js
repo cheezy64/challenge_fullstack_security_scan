@@ -42,8 +42,24 @@ const ScanSchema = new Schema({
   repo: { type: String, required: true, minlength: 1 },
   findings: { type: [FindingSchema], required: true },
   queuedAt: { type: Date, required: true },
-  scanningAt: Date,
-  finishedAt: Date,
+  scanningAt: {
+    type: Date,
+    validate: {
+      validator: function scanningAtValidator() {
+        return this.status !== 'Queued';
+      },
+      message: 'Cannot set "scanningAt" field when scan is queued',
+    },
+  },
+  finishedAt: {
+    type: Date,
+    validate: {
+      validator: function finishedAtValidator() {
+        return this.status === 'Success' || this.status === 'Failure';
+      },
+      message: 'Cannot set "finishedAt" field when scan has not been completed',
+    },
+  },
 });
 
 module.exports = model('Scan', ScanSchema);
