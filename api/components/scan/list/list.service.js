@@ -4,9 +4,9 @@ const Scan = require('../scan.model');
 module.exports = (_app) => {
   const getList = async (filter = {}) => {
     const { repo } = filter;
-    const projection = '_id repo status queuedAt scanningAt finishedAt';
+    const projection = '_id repo status queuedAt';
 
-    return Scan.find({ repo }, projection);
+    return repo ? Scan.find({ repo }, projection) : Scan.find({}, projection);
   };
 
   return {
