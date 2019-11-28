@@ -10,14 +10,17 @@
   "author": "Che Tse",
   "license": "ISC",
   "devDependencies": {
+    "@types/jest": "^24.0.23",
     "eslint": "^6.6.0",
     "eslint-config-airbnb": "^18.0.1",
     "eslint-config-airbnb-base": "^14.0.0",
     "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-jest": "^23.0.5",
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-react": "^7.16.0",
     "eslint-plugin-security": "^1.4.0",
+    "jest": "^24.9.0",
     "nodemon": "^2.0.0"
   },
   "dependencies": {
