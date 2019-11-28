@@ -4,13 +4,15 @@
   "description": "Guardrails Challenge",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon --inspect=0.0.0.0 index.js",
-    "test": "jest"
+    "start": "cross-env ENV_FILE=\".env\" nodemon --inspect=0.0.0.0 index.js",
+    "test": "cross-env ENV_FILE=\".env.test\" jest --runInBand",
+    "test:watch": "cross-env ENV_FILE=\".env.test\" jest --watchAll --runInBand"
   },
   "author": "Che Tse",
   "license": "ISC",
   "devDependencies": {
     "@types/jest": "^24.0.23",
+    "cross-env": "^6.0.3",
     "eslint": "^6.6.0",
     "eslint-config-airbnb": "^18.0.1",
     "eslint-config-airbnb-base": "^14.0.0",
@@ -20,8 +22,10 @@
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-react": "^7.16.0",
     "eslint-plugin-security": "^1.4.0",
+    "get-port": "^5.0.0",
     "jest": "^24.9.0",
-    "nodemon": "^2.0.0"
+    "nodemon": "^2.0.0",
+    "supertest": "^4.0.2"
   },
   "dependencies": {
     "cors": "^2.8.5",

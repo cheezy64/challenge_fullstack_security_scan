@@ -1,4 +1,4 @@
-require('env-smart').load(); // Load environment variables
+require('./config');
 const mongoose = require('mongoose');
 const app = require('./app');
 
