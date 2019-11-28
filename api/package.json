@@ -21,8 +21,10 @@
     "nodemon": "^2.0.0"
   },
   "dependencies": {
+    "cors": "^2.8.5",
     "env-smart": "^2.1.1",
     "express": "^4.17.1",
+    "helmet": "^3.21.2",
     "http-status-codes": "^1.4.0",
     "jsend": "^1.1.0",
     "mongoose": "^5.7.12",

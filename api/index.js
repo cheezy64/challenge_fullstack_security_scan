@@ -1,5 +1,7 @@
 require('env-smart').load(); // Load environment variables
+const cors = require('cors');
 const express = require('express');
+const helmet = require('helmet')
 const jsend = require('jsend');
 const mongoose = require('mongoose');
 const morgan = require('morgan');
@@ -11,6 +13,10 @@ const app = express();
 mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true })
   .then(() => console.log('Connected to database'))
   .catch((err) => console.error(err));
+
+// Middleware Security
+app.use(cors());
+app.use(helmet());
 
 // Middleware Logging
 app.use(morgan('dev'));
