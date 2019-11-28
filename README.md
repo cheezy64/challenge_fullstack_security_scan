@@ -18,3 +18,9 @@ My thought process was to separate how we get a list and how we get the details 
 Server side validation will leverage the Mongoose models.  I didn't think it was necessary to write additional logic since it will be harder to maintain if the validation of the request and model is decoupled from each other.  Also, by trusting that Mongoose has validated their validation logic, it puts less burden on us to unit test it.  Integreation tests will still be necessary
 ### TODO
 * A patch operation using a package like `json-patch` would be nice.  The idea would be that the server running the scan would send a patch operation when it transitions to `In Progress`, and adds a findings as it detects security holes.  This would allow the user to see real time results.  It will also have lower bandwidth requirements.  But, for simplicity sake of this exercise, I'll only implement `Post`.
+## Database
+I believe a document database would be good for representing this data.  The data is structured really well as a document, and a document database gives us the ability to have complicated queries.  We don't have any hard requirements for consistency, availability, or partition tolerance.  So, I opted not to use a relational database since partition tolerance is easy to configure with MongoDB, and we may need to rapidly expand in the future.  The document database could index the `repo` field to allow performant queries of scan results for a particular repo.
+### Schema
+The schema is pretty straight forward based on the requirements.  
+#### TODO 
+Change `status`, `ruleId`, and `severity` to be represented as enums instead of a string.  This will save space, and we can allow the client to translate the enum values to user-friendly strings (along with localization).  For the simplicity sake of the exercise, I just represented it as a string to reduce effort, even if just a little.
