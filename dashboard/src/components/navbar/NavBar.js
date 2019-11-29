@@ -6,8 +6,8 @@ import {
 const NavBar = () => {
   return (
     <ul className="header">
-      <li><NavLink to="/">Display</NavLink></li>
-      <li><NavLink to="/add">Add</NavLink></li>
+      <li><NavLink exact to="/" activeClassName="active">Display</NavLink></li>
+      <li><NavLink to="/add" activeClassName="active">Add</NavLink></li>
     </ul>
   );
 };
