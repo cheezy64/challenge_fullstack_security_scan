@@ -17,6 +17,8 @@ services:
       - 9229:9229
     volumes:
       - ./api:/usr/src/guardrails-api
+    depends_on: 
+      - mongo
 
   # Dashboard Client
   guardrails-dashboard:
@@ -32,6 +34,8 @@ services:
       - 3000:3000
     volumes:
       - ./dashboard:/usr/src/guardrails-dashboard
+    depends_on: 
+      - guardrails-api
 
   # Other services
   mongo:
