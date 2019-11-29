@@ -62,8 +62,7 @@ describe(`GET ${baseUrl}/list`, () => {
   it('should return success status with an empty data array for nonexisting repos', async () => {
     const res = await request
       .get(`${baseUrl}/list`)
-      .set('Content-Type', 'application/json')
-      .send('{"repo":"this repo dont exist, yo"}');
+      .query({ repo: 'this repo dont exist, yo' });
     const resObj = JSON.parse(res.text);
     expect(resObj.status).toBe('success');
     expect(resObj.data).toHaveLength(0);
@@ -73,8 +72,7 @@ describe(`GET ${baseUrl}/list`, () => {
   it('should return success status a nonempty data array for an existing repo', async () => {
     const res = await request
       .get(`${baseUrl}/list`)
-      .set('Content-Type', 'application/json')
-      .send(`{"repo":"${mockScanRepo}"}`);
+      .query({ repo: mockScanRepo });
     const resObj = JSON.parse(res.text);
     expect(resObj.status).toBe('success');
     expect(resObj.data).not.toHaveLength(0);
