@@ -129,6 +129,7 @@ describe(`POST ${baseUrl}/result`, () => {
         findings: mockScanFindings,
         queuedAt: new Date().toISOString(),
         scanningAt: new Date().toISOString(),
+        finishedAt: new Date().toISOString(),
       });
 
       const res = await request
@@ -148,6 +149,7 @@ describe(`POST ${baseUrl}/result`, () => {
         findings: mockScanFindings,
         queuedAt: new Date().toISOString(),
         scanningAt: new Date().toISOString(),
+        finishedAt: new Date().toISOString(),
       });
 
       const res = await request
@@ -262,6 +264,25 @@ describe(`POST ${baseUrl}/result`, () => {
         queuedAt: new Date().toISOString(),
         scanningAt: new Date().toISOString(),
         finishedAt: new Date().toISOString(),
+      });
+
+      const res = await request
+        .post(`${baseUrl}/result`)
+        .set('Content-Type', 'application/json')
+        .send(mockScanResultBody);
+
+      const resObj = JSON.parse(res.text);
+      expect(resObj.status).toBe('fail');
+      expect(res.status).toBe(422);
+    });
+
+    it('"Success" status returns failure when "queuedAt", "scanningAt", and "finishedAt" timestamp is not provided', async () => {
+      const mockScanResultBody = JSON.stringify({
+        status: 'Success',
+        repo: mockScanRepo,
+        findings: mockScanFindings,
+        queuedAt: new Date().toISOString(),
+        scanningAt: new Date().toISOString(),
       });
 
       const res = await request

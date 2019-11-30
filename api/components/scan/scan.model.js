@@ -38,28 +38,22 @@ const ScanSchema = new Schema({
     type: String,
     required: true,
     enum: [...eScanStatus], // TODO store as number and letting client display result
+    validate: {
+      validator: function statusValidator(status) {
+        if (status === 'Queued') return !!this.queuedAt && !this.scanningAt && !this.finishedAt;
+        if (status === 'In Progress') return !!this.queuedAt && !!this.scanningAt && !this.finishedAt;
+        if (status === 'Success') return !!this.queuedAt && !!this.scanningAt && !!this.finishedAt;
+        if (status === 'Failure') return !!this.queuedAt && !!this.scanningAt && !!this.finishedAt;
+        return false;
+      },
+      message: 'Ensure that only timestamps corresponding to status are provided',
+    },
   },
   repo: { type: String, required: true, minlength: 1 },
   findings: { type: [FindingSchema], required: true },
   queuedAt: { type: Date, required: true },
-  scanningAt: {
-    type: Date,
-    validate: {
-      validator: function scanningAtValidator() {
-        return this.status !== 'Queued';
-      },
-      message: 'Cannot set "scanningAt" field when scan is queued',
-    },
-  },
-  finishedAt: {
-    type: Date,
-    validate: {
-      validator: function finishedAtValidator() {
-        return this.status === 'Success' || this.status === 'Failure';
-      },
-      message: 'Cannot set "finishedAt" field when scan has not been completed',
-    },
-  },
+  scanningAt: Date,
+  finishedAt: Date,
 });
 
 module.exports = model('Scan', ScanSchema);
