@@ -25,3 +25,14 @@ The schema is pretty straight forward based on the requirements.
 Change `status`, `ruleId`, and `severity` to be represented as enums instead of a string.  This will save space, and we can allow the client to translate the enum values to user-friendly strings (along with localization).  For the simplicity sake of the exercise, I just represented it as a string to reduce effort, even if just a little.
 ## Testing
 I focused on integration tests as they added more value compared to unit testing.  I didn't see any value in unit testing a lot of the logic since I relied on Mongoose functionality to validate data.  It's not worth using `mockingoose` to mock the functionality of mongoose when integration tests will test the validation functionality and the endpoints.
+
+# Dashboard
+The view of scan results is what I choose to be customer facing.  The adding of scan results is more of an admin tool.  As dicusses in the server section, I was envisioning a server that runs the scans and reports it via the REST API.
+## Bundling
+I didn't feel that creating a project from scratch using `parcel` or `webpack` would showcase any skills, so I opted to just use `create-react-app`.
+## UI
+I kept it simple per recommendations of the exercise
+## State
+Relevant components are "dumb" so that it'll be easy to switch over to Redux state gets complicated enough
+## TODO
+* The API will allow us to request scan results by repo.  I added the `SearchBar` component to demonstrate how it might look, but it's not functional at the moment
