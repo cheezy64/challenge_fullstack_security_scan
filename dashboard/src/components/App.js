@@ -7,6 +7,7 @@ import {
 } from "react-router-dom";
 
 import NavBar from './navbar/NavBar';
+import DisplayContainer from './scanresults/DisplayContainer';
 
 function App() {
   return (
@@ -16,7 +17,7 @@ function App() {
         <NavBar />
         <div className="content">
           <Switch>
-            <Route exact path="/" component={() => <p>Display</p>} />
+            <Route exact path="/" component={DisplayContainer} />
             <Route path="/add" component={() => <p>Add</p>} />
           </Switch>
         </div>

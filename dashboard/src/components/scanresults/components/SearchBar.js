@@ -10,10 +10,10 @@ const SearchBar = ({
     <div className='searchBar'>
       <form onSubmit={onSubmit}>
         <div className='form-group'>
-          <label htmlFor='search'>Search</label>
-          <input type='text' className='form-control' id='search' onChange={onChange} value={value}/>
+          <label htmlFor='search'>Repo</label>
+          <input type='text' className='form-control' id='search' onChange={onChange} value={value} disabled placeholder='enabled on next release'/>
         </div>
-        <button type='submit' className='btn btn-primary'>Submit</button>
+        <button type='submit' className='btn btn-primary' disabled>Submit</button>
       </form>
     </div>
   );
