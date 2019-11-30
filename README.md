@@ -27,12 +27,22 @@ Change `status`, `ruleId`, and `severity` to be represented as enums instead of 
 I focused on integration tests as they added more value compared to unit testing.  I didn't see any value in unit testing a lot of the logic since I relied on Mongoose functionality to validate data.  It's not worth using `mockingoose` to mock the functionality of mongoose when integration tests will test the validation functionality and the endpoints.
 
 # Dashboard
-The view of scan results is what I choose to be customer facing.  The adding of scan results is more of an admin tool.  As dicusses in the server section, I was envisioning a server that runs the scans and reports it via the REST API.
+The view of scan results is what I choose to be customer facing.  The adding of scan results is more of an admin tool.  As dicussed in the server section, I was envisioning a server that runs the scans and reports it via the REST API.
 ## Bundling
 I didn't feel that creating a project from scratch using `parcel` or `webpack` would showcase any skills, so I opted to just use `create-react-app`.
 ## UI
 I kept it simple per recommendations of the exercise
 ## State
 Relevant components are "dumb" so that it'll be easy to switch over to Redux state gets complicated enough
-## TODO
-* The API will allow us to request scan results by repo.  I added the `SearchBar` component to demonstrate how it might look, but it's not functional at the moment
+## Components
+### Adding a Result
+I wanted a maintainable way to represent and render the data.  I also didn't want to worry about writing my own client-side validation.  So, I chose `react-jsonschema-form` since it allows us to generate a component based on a JSON schema and validates it according to the schema.  It also conveniently represents the data as JSON which is what the API expects. For this exercise, out of convenience, I added a `bootstrap` dependency since the component is styled out of the box with bootstrap.  Normally, I'd try to avoid this dependency.
+### Display a List of Results
+This component will query a list of all repos.  The API supports querying results for a single repo which the `SearchBar` component could handle (not implemented for this exercise)
+### Displaying details of a result
+I used a simple table to represent this since the exercise stated that we don't need to focus on making things too pretty.
+## Testing
+In the future, I'd use `enzyme` to test components using different props. Some components will crash if the object does not have all the expected nested properties. I'd also just do render tests.  
+
+# Other Considerations
+An alternative way of displaying the scan results would be to consolidate all findings for a particular repo into a single row.  To enable this, it would be simple to either combine it on the client or aggregate it on the server.
