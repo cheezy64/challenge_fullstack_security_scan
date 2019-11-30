@@ -8,6 +8,7 @@ import {
 
 import NavBar from './navbar/NavBar';
 import DisplayContainer from './scanresults/DisplayContainer';
+import ScanResultFormContainer from './scanresults/ScanResultFormContainer';
 import ScanResultViewContainer from './scanresults/ScanResultViewContainer';
 
 function App() {
@@ -19,7 +20,7 @@ function App() {
         <div className='content'>
           <Switch>
             <Route exact path='/' component={DisplayContainer} />
-            <Route path="/add" component={() => <p>Add</p>} />
+            <Route path='/add' component={ScanResultFormContainer} />
             <Route path='/view/:id' component={ScanResultViewContainer} />
           </Switch>
         </div>
