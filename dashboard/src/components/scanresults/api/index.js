@@ -9,6 +9,11 @@ export const getScanList = async (filters = {}) => {
   return response.json();
 };
 
+export const getScanResult = async (id) => {
+  const response = await fetch(`http://localhost:5000/api/scan/result/${id}`);
+  return response.json();
+};
+
 export const postScanResult = async (formData) => {
   const response = await fetch('http://localhost:5000/api/scan/result', {
     method: 'post',
