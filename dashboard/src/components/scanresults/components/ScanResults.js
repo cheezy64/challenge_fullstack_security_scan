@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Badge, Table } from 'react-bootstrap';
+import { NavLink, withRouter } from 'react-router-dom';
 
 const ScanResultShapePropType = {
   _id: PropTypes.string.isRequired,
@@ -12,7 +13,7 @@ const ScanResultShapePropType = {
   numFindings: PropTypes.number,
 };
 
-const ScanResult = ({
+const ScanResult = withRouter(({
   _id,
   repo,
   status,
@@ -20,18 +21,26 @@ const ScanResult = ({
   scanningAt,
   finishedAt,
   numFindings,
+  history,
 }) => {
   return (
     <tr>
-      <td>{repo}</td>
+      <td>
+      {repo}{' '}
+      {
+        numFindings <= 0 
+          ? null
+          : <Badge variant='danger'>{numFindings}</Badge>
+      }
+      </td>
       <td>{status}</td>
       <td>{queuedAt}</td>
       <td>{scanningAt ? scanningAt : 'N/A'}</td>
       <td>{finishedAt ? finishedAt : 'N/A'}</td>
-      <td>Details <Badge variant='danger'>{numFindings ? numFindings : 0}</Badge></td>
+      <td><NavLink to={`/view/${_id}`}>View</NavLink></td>
     </tr>
   )
-}
+});
 ScanResult.propTypes = ScanResultShapePropType;
 
 const ScanResults = ({
@@ -47,7 +56,7 @@ const ScanResults = ({
             <th>Queued at</th>
             <th>Scanning at</th>
             <th>Finished at</th>
-            <th>Number of findings</th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>

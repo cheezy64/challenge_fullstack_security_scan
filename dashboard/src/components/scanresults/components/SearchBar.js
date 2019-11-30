@@ -8,7 +8,7 @@ const SearchBar = ({
 }) => {
   return (
     <div className='searchBar'>
-      <form onSubmit={onSubmit}>
+      <form className='form-inline' onSubmit={onSubmit}>
         <div className='form-group'>
           <label htmlFor='search'>Repo</label>
           <input type='text' className='form-control' id='search' onChange={onChange} value={value} disabled placeholder='enabled on next release'/>

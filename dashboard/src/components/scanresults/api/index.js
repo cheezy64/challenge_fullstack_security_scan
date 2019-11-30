@@ -1,4 +1,4 @@
-export const getScanResults = async (filters = {}) => {
+export const getScanList = async (filters = {}) => {
   const { repo } = filters;
   const request = repo
     ? window.encodeURI(`http://localhost:5000/api/scan/list?repo=${repo}`)

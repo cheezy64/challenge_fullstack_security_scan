@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import SearchBar from './components/SearchBar';
 import ScanResults from './components/ScanResults';
-import { getScanResults } from './api';
+import { getScanList } from './api';
 
 class DisplayContainer extends Component {
   state = {
@@ -21,7 +21,7 @@ class DisplayContainer extends Component {
   }
 
   async componentDidMount() {
-    const scans = await getScanResults({ repo: this.state.repoSearch });
+    const scans = await getScanList({ repo: this.state.repoSearch });
     this.setState({ scans: scans.data });
   }
 
