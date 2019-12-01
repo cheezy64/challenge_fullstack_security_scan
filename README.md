@@ -13,11 +13,13 @@ Monorepo with a simple `Dockerfile` for the `api` and `dashboard`.  Environment 
 My intention is that there's are two server components, one that runs the scans (scanner), and the other that aggregates and stores the results (reporter).  The scanner will report results to the reporter.  This section will focus on the design of the reporter.
 ## HTTP Endpoints
 My thought process was to separate how we get a list and how we get the details on the results.  This way, there is a clearly defined API for retrieving all entries for a repo and updating individual results.
+
 | Endpoint             | Get | Post | Put | Patch |
 |:---------------------|:---:|:----:|:---:|:-----:|
 | api/scan/list/<repo> | Y   |      |     |       |
 | api/scan/result      |     | Y    |     |       |
 | api/scan/result/<id> | Y   |      | Y   | TODO  |
+
 ### Validation
 Server side validation will leverage the Mongoose models.  I didn't think it was necessary to write additional logic since it will be harder to maintain if the validation of the request and model is decoupled from each other.  Also, by trusting that Mongoose has validated their validation logic, it puts less burden on us to unit test it.  Integreation tests will still be necessary
 ### TODO
