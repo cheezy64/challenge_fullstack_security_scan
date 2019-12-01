@@ -158,7 +158,6 @@ const ScanResultsForm = ({
 }
 
 ScanResultsForm.propTypes = {
-  schema: PropTypes.object.isRequired,
   onSubmit: PropTypes.func.isRequired,
   onChange: PropTypes.func,
   onError: PropTypes.func,
