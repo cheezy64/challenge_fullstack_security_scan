@@ -19,7 +19,7 @@ const Finding = ({ finding, name }) => {
   </tr>);
 }
 
-const ScanResultView = ({ findings = [], status, repo, queuedAt, scanningAt, finishedAt }) => {
+const ScanResultDetails = ({ findings = [], status, repo, queuedAt, scanningAt, finishedAt }) => {
   const timestamp = status === 'Queued'
     ? queuedAt : status === 'In Progress'
     ? scanningAt : finishedAt;
@@ -53,7 +53,7 @@ const ScanResultView = ({ findings = [], status, repo, queuedAt, scanningAt, fin
     );
 }
 
-ScanResultView.propTypes = {
+ScanResultDetails.propTypes = {
   repo: PropTypes.string.isRequired,
   status: PropTypes.string,
   findings: PropTypes.arrayOf(
@@ -81,4 +81,4 @@ ScanResultView.propTypes = {
   finishedAt: PropTypes.string,
 }
 
-export default ScanResultView;
+export default ScanResultDetails;

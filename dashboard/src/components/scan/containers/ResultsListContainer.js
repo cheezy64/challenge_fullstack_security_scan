@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import SearchBar from './components/SearchBar';
-import ScanResults from './components/ScanResults';
-import { getScanList } from './api';
+import SearchBar from '../components/SearchBar';
+import ScanResultsList from '../components/ResultsList';
+import { getScanList } from '../api';
 
-class DisplayContainer extends Component {
+class ScanResultsListContainer extends Component {
   state = {
     repoSearch: '',
     scans: [],
@@ -29,10 +29,10 @@ class DisplayContainer extends Component {
     return (
       <div className='displayContainer'>
         <SearchBar onSubmit={this.onSearchSubmit} onChange={this.onSearchChange} value={this.state.repoSearch} />
-        <ScanResults scans={this.state.scans} />
+        <ScanResultsList scans={this.state.scans} />
       </div>
     )
   }
 }
 
-export default DisplayContainer;
+export default ScanResultsListContainer;

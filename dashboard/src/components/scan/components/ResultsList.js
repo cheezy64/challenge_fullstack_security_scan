@@ -43,7 +43,7 @@ const ScanResult = withRouter(({
 });
 ScanResult.propTypes = ScanResultShapePropType;
 
-const ScanResults = ({
+const ScanResultsList = ({
   scans
 }) => {
   return (
@@ -67,10 +67,10 @@ const ScanResults = ({
   )
 }
 
-ScanResults.propTypes = {
+ScanResultsList.propTypes = {
   scans: PropTypes.arrayOf(
     PropTypes.shape(ScanResultShapePropType).isRequired,
   ).isRequired,
 };
 
-export default ScanResults;
+export default ScanResultsList;

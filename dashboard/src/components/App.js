@@ -6,10 +6,10 @@ import {
   Route,
 } from 'react-router-dom';
 
-import NavBar from './navbar/NavBar';
-import DisplayContainer from './scanresults/DisplayContainer';
-import ScanResultFormContainer from './scanresults/ScanResultFormContainer';
-import ScanResultViewContainer from './scanresults/ScanResultViewContainer';
+import NavBar from './nav/NavBar';
+import ScanResultsListContainer from './scan/containers/ResultsListContainer';
+import ScanResultFormContainer from './scan/containers/ResultFormContainer';
+import ScanResultDetailsContainer from './scan/containers/ResultDetailsContainer';
 
 function App() {
   return (
@@ -19,9 +19,9 @@ function App() {
         <NavBar />
         <div className='content'>
           <Switch>
-            <Route exact path='/' component={DisplayContainer} />
+            <Route exact path='/' component={ScanResultsListContainer} />
             <Route path='/add' component={ScanResultFormContainer} />
-            <Route path='/view/:id' component={ScanResultViewContainer} />
+            <Route path='/view/:id' component={ScanResultDetailsContainer} />
           </Switch>
         </div>
       </div>

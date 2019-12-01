@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { getScanResult } from './api';
-import ScanResultView from './components/ScanResultView';
+import { getScanResult } from '../api';
+import ScanResultDetails from '../components/ResultDetails';
 
-class ScanResultViewContainer extends Component {
+class ScanResultDetailsContainer extends Component {
   state = {
     data: {}
   };
@@ -20,9 +20,9 @@ class ScanResultViewContainer extends Component {
 
   render() {
     return (
-      <ScanResultView {...this.state.data} />
+      <ScanResultDetails {...this.state.data} />
     )
   }
 }
 
-export default ScanResultViewContainer;
+export default ScanResultDetailsContainer;

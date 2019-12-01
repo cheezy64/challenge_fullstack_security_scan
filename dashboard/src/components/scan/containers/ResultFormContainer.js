@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { postScanResult } from './api/';
+import { postScanResult } from '../api/';
 
-import ScanResultForm from './components/ScanResultForm';
-import DismissableAlert from './components/DismissableAlert';
+import ScanResultForm from '../components/ResultForm';
+import DismissableAlert from '../../common/DismissableAlert';
 
 class ScanResultFormContainer extends Component {
   state = {
